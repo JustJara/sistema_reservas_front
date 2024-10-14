@@ -1,0 +1,115 @@
+/* Reset de márgenes y padding */
+html, html > * {
+    box-sizing: border-box;
+    margin: 0;
+    font-size: 62.5%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    display: grid;
+    align-items: center;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+.parent {
+    display: grid;
+    font-size: 1.6rem;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 150px 300px 200px;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    place-items: center;
+}
+
+.div1 { 
+    grid-area: 1 / 1 / 2 / 3;
+    width: 100%;
+    height: 100%;
+}
+
+.div2 { 
+    grid-area: 1 / 3 / 2 / 6; 
+    width: 100%;
+
+
+}
+
+.div3 { 
+    grid-area: 2 / 1 / 3 / 6;
+    background-image: url("../assets/campus/1.png");
+    height: 300px;
+    width: 100%;
+    position: relative;
+    background-position:0 -135px;
+    background-repeat: no-repeat;
+    background-size:cover ;
+}
+
+.div4 { 
+    grid-area: 3 / 1 / 4 / 3;
+}
+
+.div5 { 
+    grid-area: 3 / 3 / 4 / 6;
+    width: 100%;
+    display: grid;
+    align-items: end;
+
+}
+
+
+.nav-bar{
+    width: 100%;
+    padding-top:65px ;
+    display: flex;
+    font-size: 1.8rem;
+    gap: 120px;
+    justify-content: end;
+}
+
+.nav-bar a{
+    text-decoration: none;
+    font-weight: bold;
+    color: #333;
+}
+
+.nav-bar a:hover {
+    color: #C2262B;
+}
+.logo {
+    width: 300px;
+    padding-top: 30px;
+    height: 100px;
+}
+
+
+p {
+    font-style: italic;
+    font-size: 1.6rem;
+    width: 400px;
+    font-weight: 500;
+}
+
+.container{
+    display: flex;
+    width: 1200px;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.gallery {
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+}
+
+.gallery img {
+    width: 170px;
+}

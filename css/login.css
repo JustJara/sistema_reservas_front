@@ -1,0 +1,110 @@
+html, html > * {
+    box-sizing: border-box;
+    margin: 0;
+    font-size: 62.5%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    display: grid;
+    align-items: center;
+}
+
+
+
+.right-section {
+    background-color: white;
+    border-radius: 8px;
+    width: 400px;
+    text-align: center;
+    font-size: 1.6rem;
+    padding: 10px;
+}
+
+.right-section h1 {
+    color: #333;
+}
+
+.right-section img {
+    max-width: 60%;    
+    padding: 0;
+    max-height: 60%;
+    margin: auto;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.form_input{
+    padding: 6px 20px;
+}
+
+input{
+    box-sizing: border-box;
+    padding: 6px 8px;
+    border-radius: 4px;
+    border: 1px solid black;
+    margin-top: 20px;
+    width: 300px;
+    height: 40px;
+}
+
+input::placeholder{
+    font-size: 1.6rem;
+    font-style: italic;
+    text-align: center;
+}
+
+.form-submit-button{
+    background-color: #932428;
+    border-radius: 15px;
+    border: none;
+    color: white; 
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 20px;
+    padding: 10px;
+    width: 150px;
+}
+
+.form-submit-button:hover{
+    background-color: #932428;
+}
+
+a {
+    font-size: 1.2rem;
+    color: black;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.left-section{
+    width: 400px;
+    height: 500px;
+    background-image: url("../assets/campus/1.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: -50px;
+    border-radius: 10px;
+}
+
+.image{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.container{
+    display: flex;
+    width: 900px;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.remember-pass{
+    margin-top: 30px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
