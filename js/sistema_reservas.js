@@ -39,9 +39,9 @@ export class SistemaReservas {
     return null;
   }
 
-  sendEmail(user) {
-    const email = user.getEmail();
-    const password = user.getPassword();
+  async sendEmail(user) {
+    const email = user.email
+    const password = user.password
 
     const serviceID = "service_a9l5gt6";
     const templateID = "template_05y5kvh";
@@ -57,7 +57,7 @@ export class SistemaReservas {
       },
     };
 
-    fetch("https://api.emailjs.com/api/v1.0/email/send", {
+    await fetch("https://api.emailjs.com/api/v1.0/email/send", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -22,21 +22,31 @@
                     caracter especial como *, -, o #
                 </p>
 
-                <form class="form">
+                <form id="changepass-form" class="form" >
 
                     <div class="form-input">
-                        <input type="text" placeholder="Nueva contraseña">
+                        <input id="identification" type="text" placeholder="Número de identificación">
+                    </div>
+
+                    <div class="form-input">
+                        <input id="old-password" type="password" placeholder="Contraseña antigua">
+                    </div>
+
+                    <div class="form-input">
+                        <input id="password1" type="password" placeholder="Nueva contraseña">
                     </div>
         
                     <div class="form-input">
-                        <input type="password" placeholder="Nueva contraseña (de nuevo)">
+                        <input id="password2" type="password" placeholder="Nueva contraseña (de nuevo)">
                     </div>
 
-                    <button class="form-submit-button">Guardar cambios</button>
+                    <button id="changepasswordbtn" type="submit" class="form-submit-button">Guardar cambios</button>
 
                 </form>
             </section>
     </section>
+
+    <script type="module" src="../js/main.js" ></script>
 
 
 </body>
