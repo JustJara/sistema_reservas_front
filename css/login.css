@@ -65,11 +65,12 @@ input::placeholder{
     font-weight: bold;
     margin-top: 20px;
     padding: 10px;
+    transition: background-color 0.3s;
     width: 150px;
 }
 
 .form-submit-button:hover{
-    background-color: #932428;
+    background-color: #C22820;
 }
 
 a {

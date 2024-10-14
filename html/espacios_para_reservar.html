@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espacios | UdeM</title>
+    <link rel="stylesheet" href="../css/espacios_para_reservar.css">
+</head>
+<body>
+    <div class="container">
+
+        <div class="parent">
+            <div class="div1">
+                <div class="logo">
+                    <img src="../assets/logo_udem.jpeg" alt="Logo universidad de medellín" href="https://udemedellin.edu.co/">
+    
+                </div>
+            </div>
+            <div class="div2">
+                <nav class="nav-bar">
+                    <a href="../html/home.html">Inicio</a>
+                    <a href="../html/espacios_para_reservar.html">Reservar espacios</a>
+                    <a href="../html/mis_reservas.html">Mis reservas</a>
+                </nav>
+                
+            </div>
+            <div class="div3">
+                <h2>Espacios para reservar</h2>
+        <div class="carousel">
+            <button class="arrow left-arrow">&lt;</button>
+            <div class="carousel-items">
+                <div class="carousel-item" onclick="selectSpace('piscina')">
+                    <img src="../assets/espacios/4.png" alt="Piscina">
+                    <p>Piscina</p>
+                </div>
+                <div class="carousel-item" onclick="selectSpace('aulas')">
+                    <img src="../assets/espacios/5.png" alt="Aulas">
+                    <p>Aulas</p>
+                </div>
+                <div class="carousel-item" onclick="selectSpace('gimnasio')">
+                    <img src="../assets/espacios/6.png" alt="Gimnasio">
+                    <p>Gimnasio</p>
+                </div>
+                <div class="carousel-item" onclick="selectSpace('cancha')">
+                    <img  src="../assets/espacios/7.png" alt="Cancha">
+                    <p>Cancha</p>
+                </div>
+            </div>
+            <button class="arrow right-arrow">&gt;</button>
+        </div>
+
+        <div class="reserve-button">
+            <a href="pagina_reservas1.html"  class="btn-reserva">Reserva Ahora</a>
+        </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        function sendToReservation() {
+            window.location.href = "pagina_reservas1.html";
+        }
+
+    let selectedSpace = null;
+
+    function selectSpace(space) {
+        selectedSpace = space; // Guarda el espacio seleccionado en la variable
+        console.log("Espacio seleccionado:", selectedSpace);
+    }
+
+    function redirectToReservation() {
+        if (selectedSpace) {
+            window.location.href = `reserva_${selectedSpace}.html`; // Redirige a la página correspondiente
+        } else {
+            alert("Por favor selecciona un espacio antes de continuar.");
+        }
+    }
+    </script>
+
+</body>
+</html>

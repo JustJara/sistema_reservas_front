@@ -1,13 +1,10 @@
-import { SistemaReservas } from "./sistema_reservas.js";
 import { User } from "./user.js";
 
 
 class Main {
 
     constructor(){
-        
-        this.sistemaReservas = new SistemaReservas();
-
+    
         this.userService = new User('temporal','temporal','temporal');
         this.init();
     }
@@ -63,7 +60,7 @@ class Main {
             if(user == null){
                 alert("Lo siento el usuario no existe");
             } else{
-                await this.sistemaReservas.sendEmail(user);
+                await this.userService.sendEmail(user);
                 window.location.href = "../html/recordar_contrasena2.html";
             }
         })

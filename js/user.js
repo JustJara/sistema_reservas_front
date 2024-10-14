@@ -55,7 +55,7 @@ export class User{
 
     async changePassword(identification,password1){
         const response = await fetch(`${this.apiurl}/users/password/${identification}`,{
-            method: 'PATCH',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -67,4 +67,43 @@ export class User{
         const data = await response.json();
         console.log('CONSOLE LOG DESDE USERS.JS',data);
     }
+
+    async sendEmail(user) {
+    const email = user.email
+    const password = user.password
+
+    const serviceID = "service_a9l5gt6";
+    const templateID = "template_05y5kvh";
+
+    const data = {
+      service_id: serviceID,
+      template_id: templateID,
+      user_id: "3BGGyuucb7tfX7vpj",
+      template_params: {
+        email,
+        password,
+        "g-recaptcha-response": "03AHJ_ASjnLA214KSNKFJAK12sfKASfehbmfd...",
+      },
+    };
+
+    await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        comsole.log("Your mail is sent!");
+      })
+      .catch((error) => {
+        console.log("Oops... " + error);
+      });
+  }
 }

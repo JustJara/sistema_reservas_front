@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reservas | UdeM</title>
+    <link rel="stylesheet" href="../css/pagina_reservas.css" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="parent">
+            <div class="div1">
+                <div class="logo">
+                    <img src="../assets/logo_udem.jpeg" alt="Logo universidad de medellín"
+                        href="https://udemedellin.edu.co/" />
+                </div>
+            </div>
+
+            <div class="div2">
+                <nav class="nav-bar">
+                    <a href="../html/home.html">Inicio</a>
+                    <a href="../html/espacios_para_reservar.html">Reservar espacios</a>
+                    <a href="mis_reservas.html">Mis reservas</a>
+                </nav>
+            </div>
+
+            <div class="div3">
+                <section class="container2">
+                    <div class="space">
+                        <div class="space-info">
+                            <h2>Piscina</h2>
+                            <p>Observaciones...</p>
+                        </div>
+                        <input type="radio" name="selected-space" />
+                    </div>
+
+                    <div class="space">
+                        <div class="space-info">
+                            <h2>Gimnasio</h2>
+                            <p>Observaciones...</p>
+                        </div>
+                        <input type="radio" name="selected-space" />
+                    </div>
+
+                    <div class="space">
+                        <div class="space-info">
+                            <h2>Cancha</h2>
+                            <p>Observaciones...</p>
+                        </div>
+                        <input type="radio" name="selected-space" />
+                    </div>
+
+                    <div class="space">
+                        <div class="space-info">
+                            <h2>Aulas</h2>
+                            <p>Observaciones...</p>
+                        </div>
+                        <input type="radio" name="selected-space" />
+                    </div>
+
+                    <div class="space">
+                        <div class="space-info">
+                            <h2>Casa club del egresado</h2>
+                            <p>Observaciones...</p>
+                        </div>
+                        <input type="radio" name="selected-space" />
+                    </div>
+
+                    <div class="space">
+                        <div class="space-info">
+                            <h2>Coliseo</h2>
+                            <p>Observaciones...</p>
+                        </div>
+                        <input type="radio" name="selected-space" />
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="container3">
+        <form id="reservationForm">
+            <h3>Agregue sus datos y guarde su reserva</h3>
+            <label>Fecha</label>
+            <input id="calendar" type="datetime-local" placeholder="Seleccione una fecha" />
+
+                <label for="name">Nombre y apellidos*</label>
+                <input type="text" id="name" name="name" required />
+
+                <label for="relationship">Vínculo con la Universidad</label>
+                <select id="relationship" name="relationship" required>
+                    <option value="">--Seleccione una opción--</option>
+                    <option value="estudiante">Estudiante</option>
+                    <option value="profesor">Profesor</option>
+                    <option value="personal">Personal</option>
+                    <option value="otro">Otro</option>
+                </select>
+
+                <button class="form-submit-button" type="submit">Guardar Reserva</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

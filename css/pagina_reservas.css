@@ -1,0 +1,197 @@
+/* Reset de márgenes y padding */
+html, html > * {
+    box-sizing: border-box;
+    margin: 0;
+    font-size: 62.5%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    display: grid;
+    align-items: center;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+.parent {
+    display: grid;
+    font-size: 1.6rem;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 150px 300px 200px;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    place-items: center;
+}
+
+.div1 { 
+    grid-area: 1 / 1 / 2 / 3;
+    width: 100%;
+    height: 100%;
+}
+
+.div2 { 
+    grid-area: 1 / 3 / 2 / 6; 
+    width: 100%;
+
+
+}
+
+.div3 { 
+    grid-area: 2 / 1 / 4 / 6;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    background-position:0 -135px;
+    background-repeat: no-repeat;
+    background-size:cover ;
+    
+}
+
+
+.nav-bar{
+    width: 100%;
+    padding-top:65px ;
+    display: flex;
+    font-size: 1.8rem;
+    gap: 120px;
+    justify-content: end;
+}
+
+.nav-bar a{
+    text-decoration: none;
+    font-weight: bold;
+    color: #333;
+}
+
+.nav-bar a:hover {
+    color: #C2262B;
+}
+.logo {
+    width: 300px;
+    padding-top: 30px;
+    height: 100px;
+}
+
+
+p {
+    font-style: italic;
+    font-size: 1.6rem;
+    width: 400px;
+    font-weight: 500;
+}
+
+.container{
+    display: flex;
+    width: 1200px;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    text-align: center;
+}
+
+.container2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 40px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.container3 {
+    background-color: white;
+    width: 1200px;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size: 1.6rem;
+}
+
+.space {
+    display: flex;
+    width: 450px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.space-info h2 {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.space-info p {
+    color: #666;
+    font-style: italic;
+}
+
+input[type="radio"] {
+    transform: scale(1.5);
+}
+
+
+h2, h3 {
+    color: #c30000;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input, select {
+    padding: 10px;
+    width: 250px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+button {
+    background-color: #c30000;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+svg {
+    width: 50px;
+    height: 50px;
+}
+
+button:hover {
+    background-color: #a00000;
+}
+
+.form-submit-button{
+    background-color: #932428;
+    border-radius: 15px;
+    border: none;
+    color: white; 
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 20px;
+    padding: 10px;
+    transition: background-color 0.3s;
+    width: 150px;
+}
