@@ -162,6 +162,23 @@ class Main {
 
 
     async makeReservation() {
+        const opciones = {
+            childList: true,
+            subtree: true,
+            attributes: true
+        };
+
+        const observador = new MutationObserver((mutaciones) => {
+            mutaciones.forEach((mutacion) => {
+                if (mutacion.addedNodes.length > 0) {
+                    mutacion.addedNodes.forEach((nodo) => {
+                        if (nodo.nodeType === Node.ELEMENT_NODE) {
+                            const formulario = nodo;
+                        }
+                    });
+                }
+            });
+        });
         const $spaces = document.querySelectorAll('.space')
         $spaces.forEach(space => {
             space.addEventListener('click', async () => {
@@ -169,6 +186,7 @@ class Main {
                 const $reservationForm = document.querySelector(`#${spaceId}ReservationForm`);
                 this.spaceId = spaceId
                 const $dialog = document.querySelector(`#${spaceId}Modal`)
+                observador.observe($dialog, opciones);
                 const $cancel = document.querySelector(`#${spaceId}Modalcancel`)
                 this.agregarEvento($reservationForm)
                 $dialog.showModal()
@@ -176,7 +194,6 @@ class Main {
 
                 this.generateScheduleTable(spaceId)
                 const date = new Date().toLocaleDateString('en-CA');
-                console.log("🚀 ~ Main ~ space.addEventListener ~ date:", date)
             })
         })
 
@@ -209,157 +226,186 @@ class Main {
 
 
     generateScheduleTable(spaceId) {
-        const reservations = [
-            { espacio_reserva: "gym", fecha_de_reserva: "2024-10-29", hora_fin_reserva: "08:00:00", hora_inicio_reserva: "06:00:00", id_reserva: 12, id_usuario: "1020222955" },
-            { espacio_reserva: "gym", fecha_de_reserva: "2024-10-29", hora_fin_reserva: "08:00:00", hora_inicio_reserva: "06:00:00", id_reserva: 13, id_usuario: "1020222956" },
-            { espacio_reserva: "gym", fecha_de_reserva: "2024-11-01", hora_fin_reserva: "12:00:00", hora_inicio_reserva: "10:00:00", id_reserva: 14, id_usuario: "1020222957" },
-            { espacio_reserva: "coliseo", fecha_de_reserva: "2024-11-02", hora_fin_reserva: "14:00:00", hora_inicio_reserva: "12:00:00", id_reserva: 15, id_usuario: "1020222958" },
-            { espacio_reserva: "gym", fecha_de_reserva: "2024-11-03", hora_fin_reserva: "16:00:00", hora_inicio_reserva: "14:00:00", id_reserva: 16, id_usuario: "1020222959" },
-            { espacio_reserva: "pool", fecha_de_reserva: "2024-11-04", hora_fin_reserva: "18:00:00", hora_inicio_reserva: "16:00:00", id_reserva: 17, id_usuario: "1020222960" },
-            { espacio_reserva: "cancha", fecha_de_reserva: "2024-11-05", hora_fin_reserva: "20:00:00", hora_inicio_reserva: "18:00:00", id_reserva: 18, id_usuario: "1020222961" }
-        ];
+        // const reservations = [
+        //     { espacio_reserva: "gym", fecha_de_reserva: "2024-10-29", hora_fin_reserva: "08:00:00", hora_inicio_reserva: "06:00:00", id_reserva: 12, id_usuario: "1020222955" },
+        //     { espacio_reserva: "gym", fecha_de_reserva: "2024-10-29", hora_fin_reserva: "08:00:00", hora_inicio_reserva: "06:00:00", id_reserva: 13, id_usuario: "1020222956" },
+        //     { espacio_reserva: "gym", fecha_de_reserva: "2024-11-01", hora_fin_reserva: "12:00:00", hora_inicio_reserva: "10:00:00", id_reserva: 14, id_usuario: "1020222957" },
+        //     { espacio_reserva: "coliseo", fecha_de_reserva: "2024-11-02", hora_fin_reserva: "14:00:00", hora_inicio_reserva: "12:00:00", id_reserva: 15, id_usuario: "1020222958" },
+        //     { espacio_reserva: "gym", fecha_de_reserva: "2024-11-03", hora_fin_reserva: "16:00:00", hora_inicio_reserva: "14:00:00", id_reserva: 16, id_usuario: "1020222959" },
+        //     { espacio_reserva: "pool", fecha_de_reserva: "2024-11-04", hora_fin_reserva: "18:00:00", hora_inicio_reserva: "16:00:00", id_reserva: 17, id_usuario: "1020222960" },
+        //     { espacio_reserva: "cancha", fecha_de_reserva: "2024-11-05", hora_fin_reserva: "20:00:00", hora_inicio_reserva: "18:00:00", id_reserva: 18, id_usuario: "1020222961" }
+        // ];
 
         switch (spaceId) {
             case 'gym':
-                const gymReservations = reservations.filter(reservation => reservation.espacio_reserva === 'gym');
-                const MAX_CAPACITY_PER_HOUR = 2;
-                const hourBlocks = {
-                    "06:00:00": 0,
-                    "08:00:00": 0,
-                    "10:00:00": 0,
-                    "12:00:00": 0,
-                    "14:00:00": 0,
-                    "16:00:00": 0,
-                    "18:00:00": 0
-                }
-
                 const hours = [
                     "06:00 - 08:00", "08:00  - 10:00", "10:00 - 12:00",
                     "12:00 - 14:00", "14:00  - 16:00", "16:00 - 18:00", "18:00 - 20:00"
-                ]
-
-                gymReservations.forEach(reservation => {
-                    hourBlocks[reservation.hora_inicio_reserva] += 1;
-                })
-
+                ];
                 const modalTableContainer = document.querySelector(`#${spaceId}Modal`);
 
-                // const calendar = document.createElement('input')
-                // calendar.type = 'date'
-                // calendar.min = new Date().toLocaleDateString('en-CA')
-                // calendar.max= new Date(new Date().toLocaleDateString('en-CA') + 86400000)
-                // modalTableContainer.appendChild(calendar)
-
-                // calendar.addEventListener('change',(e)=>{
-                //     console.log(e.target.value)
-                // })
 
                 const calendar = document.createElement('input');
                 calendar.type = 'date';
 
                 // Obtén fecha actual
                 const fechaActual = new Date();
-                
-                console.log("🚀 ~ Main ~ generateScheduleTable ~ fechaActual:", fechaActual)
+
                 const diaActual = fechaActual.getDay(); // 0 = domingo, 1 = lunes, ..., 6 = sábado
-                console.log("🚀 ~ Main ~ generateScheduleTable ~ diaActual:", diaActual)
 
                 // Calcula fecha del día siguiente
                 const diaSiguiente = new Date(fechaActual.getTime() + 86400000);
 
                 // Asigna fecha mínima y máxima
-                // calendar.min = fechaActual.toLocaleDateString('en-CA');
-                // calendar.max = diaSiguiente.toLocaleDateString('en-CA');
-
+                calendar.min = fechaActual.toLocaleDateString('en-CA');
+                calendar.max = diaSiguiente.toLocaleDateString('en-CA');
+                let fechaSeleccionada
                 // Agrega evento de cambio
-                calendar.addEventListener('change', (event) => {
-                const fechaSeleccionada = new Date(event.target.value);
-                const diaSeleccionado = fechaSeleccionada.getDay();
-                console.log("🚀 ~ Main ~ calendar.addEventListener ~ diaSeleccionado:", diaSeleccionado)
+                calendar.addEventListener('change', async (event) => {
+                    fechaSeleccionada = new Date(event.target.value);
 
-                // Restringe sábados y domingos
-                if (diaSeleccionado === 3 || diaSeleccionado === 4) {
-                    alert('No se puede seleccionar fines de semana');
-                    event.target.value = ''; // Limpia selección
-                }
+                    const diaSeleccionado = fechaSeleccionada.getDay();
 
-                // Viernes permite seleccionar lunes
-                if (diaActual === 2 && diaSeleccionado === 5) {
-                    console.log("MELO")
-                    return;
-                }
+                    // Restringe sábados y domingos
+                    if (diaSeleccionado === 5 || diaSeleccionado === 6) {
+                        alert('No se puede seleccionar fines de semana');
+                        event.target.value = ''; // Limpia selección
+                    }
 
-                // Solo permite seleccionar día actual o siguiente
-                // if (
-                //     fechaSeleccionada.getTime() !== fechaActual.getTime() &&
-                //     fechaSeleccionada.getTime() !== diaSiguiente.getTime()
-                // ) {
-                //     alert('Solo se puede seleccionar hoy o mañana');
-                //     event.target.value = ''; // Limpia selección
-                // }
+                    // Viernes permite seleccionar lunes
+                    if (diaActual === 2 && diaSeleccionado === 5) {
+                        return;
+                    }
+
+                    fechaSeleccionada = fechaSeleccionada.toLocaleDateString('en-CA');
+                    const reservations = await this.getReservationsForSpaceByDate(fechaSeleccionada, spaceId);
+                    if (reservations.length != 0) {
+
+                        this.actualizarTabla(reservations, spaceId, hours);
+                    } else {
+                        this.clearTable(spaceId);
+                    }
+
                 });
-
                 modalTableContainer.prepend(calendar);
 
-                /************************************* */
-
-                const tableBody = modalTableContainer.querySelector("tbody");
-                tableBody.innerHTML = "";
-
-                hours.forEach((hourBlock, rowIndex) => {
-                    const row = document.createElement("tr");
-                    const hourCell = document.createElement("td");
-                    hourCell.textContent = hourBlock;
-                    row.appendChild(hourCell);
-
-                    for (let i = 0; i < 1; i++) {
-                        const statusCell = document.createElement("td")
-                        const status = hourBlocks[`${hourBlock.slice(0, 5)}:00`] < MAX_CAPACITY_PER_HOUR ? 'Disponible' : 'Ocupado';
-                        statusCell.classList.add(status)
-
-                        if (status === 'Disponible') {
-                            statusCell.innerHTML = `<input name="time" type="radio" class="${status}" value="${hourBlock}" >`;
-
-                        }else{
-                            statusCell.innerText = 'No disponible'
-                        }
-                        row.appendChild(statusCell);
-                    }
-                    tableBody.appendChild(row);
-                })
             case 'pool':
+                hours = [
+                    "06:00 - 07:00", "07:00  - 08:00", "08:00 - 09:00",
+                    "09:00 - 10:00", "10:00  - 11:00", "11:00 - 12:00", "12:00 - 13:00", "13:00 - 14:00", "14:00 - 15:00", "15:00 - 16:00", "16:00 - 17:00", "17:00 - 18:00", "18:00 - 19:00", "19:00 - 20:00"
+                ];
+                const modalTableContainer = document.querySelector(`#${spaceId}Modal`);
+
+
+                const calendar = document.createElement('input');
+                calendar.type = 'date';
+
+                // Obtén fecha actual
+                const fechaActual = new Date();
+
+                const diaActual = fechaActual.getDay(); // 0 = domingo, 1 = lunes, ..., 6 = sábado
+
+                // Calcula fecha del día siguiente
+                const diaSiguiente = new Date(fechaActual.getTime() + 86400000);
+
+                // Asigna fecha mínima y máxima
+                calendar.min = fechaActual.toLocaleDateString('en-CA');
+                calendar.max = diaSiguiente.toLocaleDateString('en-CA');
+                let fechaSeleccionada
+                // Agrega evento de cambio
+                calendar.addEventListener('change', async (event) => {
+                    fechaSeleccionada = new Date(event.target.value);
+
+                    const diaSeleccionado = fechaSeleccionada.getDay();
+
+                    // Restringe sábados y domingos
+                    if (diaSeleccionado === 5 || diaSeleccionado === 6) {
+                        alert('No se puede seleccionar fines de semana');
+                        event.target.value = ''; // Limpia selección
+                    }
+
+                    // Viernes permite seleccionar lunes
+                    if (diaActual === 2 && diaSeleccionado === 5) {
+                        return;
+                    }
+
+                    fechaSeleccionada = fechaSeleccionada.toLocaleDateString('en-CA');
+                    const reservations = await this.getReservationsForSpaceByDate(fechaSeleccionada, spaceId);
+                    if (reservations.length != 0) {
+
+                        this.actualizarTabla(reservations, spaceId, hours);
+                    } else {
+                        this.clearTable(spaceId);
+                    }
+
+                });
+                modalTableContainer.prepend(calendar);
             //codigo
             case 'cancha':
             //codigo
             case 'coliseo':
             //codigo
         }
+    }
 
-        // const modalTableContainer = document.querySelector(`#${spaceId}Modal`);
+    clearTable(spaceId) {
+        const modalTableContainer = document.querySelector(`#${this.spaceId}Modal`);
+        const tableBody = modalTableContainer.querySelector("tbody");
+        tableBody.innerHTML = ""; // Elimina todas las filas de la tabla
+    }
 
-        // const tableBody = modalTableContainer.querySelector("tbody");
-        // tableBody.innerHTML = "";
+    actualizarTabla(reservations, spaceId, hours) {
+        const modalTableContainer = document.querySelector(`#${spaceId}Modal`);
+        let tableBody = modalTableContainer.querySelector("tbody");
 
-        // hours.forEach((hourBlock, rowIndex) => {
-        //     const row = document.createElement("tr");
-        //     const hourCell = document.createElement("td");
-        //     hourCell.textContent = hourBlock;
-        //     row.appendChild(hourCell);
+        // Si no existe un tbody, lo creamos y lo agregamos a la tabla
+        if (!tableBody) {
+            const table = modalTableContainer.querySelector("table");
+            tableBody = document.createElement("tbody");
+            table.appendChild(tableBody);
+        }
 
-        //     for (let i = 0; i < 1; i++) {
-        //         const statusCell = document.createElement("td")
-        //         const status = "Disponible";
-        //         statusCell.classList.add(status)
+        // Limpiar la tabla antes de agregar nuevas filas
+        tableBody.innerHTML = "";
 
-        //         if (status === 'Disponible') {
-        //             statusCell.innerHTML = `<input name="time" type="radio" class="${status}" value="${hourBlock}" >`;
+        let MAX_CAPACITY_PER_HOUR = 2;
+        let hourBlocks = {
+            "06:00:00": 0,
+            "08:00:00": 0,
+            "10:00:00": 0,
+            "12:00:00": 0,
+            "14:00:00": 0,
+            "16:00:00": 0,
+            "18:00:00": 0
+        };
 
-        //         }
-        //         row.appendChild(statusCell);
-        //     }
-        //     tableBody.appendChild(row);
-        // })
 
+
+        // Actualizar bloques de horas con las reservas actuales
+        reservations.forEach(reservation => {
+            hourBlocks[reservation.hora_inicio_reserva] += 1;
+        });
+
+        // Generar filas de la tabla
+        hours.forEach((hourBlock) => {
+            const row = document.createElement("tr");
+            const hourCell = document.createElement("td");
+            hourCell.textContent = hourBlock;
+            row.appendChild(hourCell);
+
+            const statusCell = document.createElement("td");
+            const status = hourBlocks[`${hourBlock.slice(0, 5)}:00`] < MAX_CAPACITY_PER_HOUR ? 'Disponible' : 'Ocupado';
+            statusCell.classList.add(status);
+
+            if (status === 'Disponible') {
+                statusCell.innerHTML = `<input name="time" type="radio" class="${status}" value="${hourBlock}" >`;
+            } else {
+                statusCell.innerText = 'No disponible';
+            }
+
+            row.appendChild(statusCell);
+            tableBody.appendChild(row);
+        });
     }
 
     convertToTimeRange(timeRange) {
@@ -371,14 +417,6 @@ class Main {
             let [time, period] = timeStr.split(" ");
             let [hours, minutes] = time.split(":").map(Number);
 
-            // Ajustar la hora para AM/PM
-            if (period.toLowerCase() === "pm" && hours !== 12) {
-                hours += 12;
-            } else if (period.toLowerCase() === "am" && hours === 12) {
-                hours = 0; // Medianoche es 00:00
-            }
-
-            // Devolver una cadena en formato 'HH:MM'
             return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
         }
 
@@ -406,6 +444,7 @@ class Main {
     }
 
     showReservations(reservations) {
+
 
         if (reservations.length > 0) {
 

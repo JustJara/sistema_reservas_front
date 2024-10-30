@@ -30,7 +30,7 @@ export class Reserva {
   }
 
   async getReservationsById(identification, fechaReserva) {
-    const response = await fetch(`${this.apiurl}/reservationById?identification=${encodeURIComponent(identification)}&fechaReserva=${encodeURIComponent(fechaReserva)}`);
+    const response = await fetch(`${this.apiurl}/reservationById?identification=${identification}&fechaReserva=${fechaReserva}`);
     const data = await response.json();
     return data;
   }
