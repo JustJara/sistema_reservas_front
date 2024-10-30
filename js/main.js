@@ -225,128 +225,191 @@ class Main {
     }
 
 
+    // generateScheduleTable(spaceId) {
+    //     // const reservations = [
+    //     //     { espacio_reserva: "gym", fecha_de_reserva: "2024-10-29", hora_fin_reserva: "08:00:00", hora_inicio_reserva: "06:00:00", id_reserva: 12, id_usuario: "1020222955" },
+    //     //     { espacio_reserva: "gym", fecha_de_reserva: "2024-10-29", hora_fin_reserva: "08:00:00", hora_inicio_reserva: "06:00:00", id_reserva: 13, id_usuario: "1020222956" },
+    //     //     { espacio_reserva: "gym", fecha_de_reserva: "2024-11-01", hora_fin_reserva: "12:00:00", hora_inicio_reserva: "10:00:00", id_reserva: 14, id_usuario: "1020222957" },
+    //     //     { espacio_reserva: "coliseo", fecha_de_reserva: "2024-11-02", hora_fin_reserva: "14:00:00", hora_inicio_reserva: "12:00:00", id_reserva: 15, id_usuario: "1020222958" },
+    //     //     { espacio_reserva: "gym", fecha_de_reserva: "2024-11-03", hora_fin_reserva: "16:00:00", hora_inicio_reserva: "14:00:00", id_reserva: 16, id_usuario: "1020222959" },
+    //     //     { espacio_reserva: "pool", fecha_de_reserva: "2024-11-04", hora_fin_reserva: "18:00:00", hora_inicio_reserva: "16:00:00", id_reserva: 17, id_usuario: "1020222960" },
+    //     //     { espacio_reserva: "cancha", fecha_de_reserva: "2024-11-05", hora_fin_reserva: "20:00:00", hora_inicio_reserva: "18:00:00", id_reserva: 18, id_usuario: "1020222961" }
+    //     // ];
+
+    //     switch (spaceId) {
+    //         case 'gym':
+    //             const hours = [
+    //                 "06:00 - 08:00", "08:00  - 10:00", "10:00 - 12:00",
+    //                 "12:00 - 14:00", "14:00  - 16:00", "16:00 - 18:00", "18:00 - 20:00"
+    //             ];
+    //             const modalTableContainer = document.querySelector(`#${spaceId}Modal`);
+
+
+    //             const calendar = document.createElement('input');
+    //             calendar.type = 'date';
+
+    //             // Obtén fecha actual
+    //             const fechaActual = new Date();
+
+    //             const diaActual = fechaActual.getDay(); // 0 = domingo, 1 = lunes, ..., 6 = sábado
+
+    //             // Calcula fecha del día siguiente
+    //             const diaSiguiente = new Date(fechaActual.getTime() + 86400000);
+
+    //             // Asigna fecha mínima y máxima
+    //             calendar.min = fechaActual.toLocaleDateString('en-CA');
+    //             calendar.max = diaSiguiente.toLocaleDateString('en-CA');
+    //             let fechaSeleccionada
+    //             // Agrega evento de cambio
+    //             calendar.addEventListener('change', async (event) => {
+    //                 fechaSeleccionada = new Date(event.target.value);
+
+    //                 const diaSeleccionado = fechaSeleccionada.getDay();
+
+    //                 // Restringe sábados y domingos
+    //                 if (diaSeleccionado === 5 || diaSeleccionado === 6) {
+    //                     alert('No se puede seleccionar fines de semana');
+    //                     event.target.value = ''; // Limpia selección
+    //                 }
+
+    //                 // Viernes permite seleccionar lunes
+    //                 if (diaActual === 2 && diaSeleccionado === 5) {
+    //                     return;
+    //                 }
+
+    //                 fechaSeleccionada = fechaSeleccionada.toLocaleDateString('en-CA');
+    //                 const reservations = await this.getReservationsForSpaceByDate(fechaSeleccionada, spaceId);
+    //                 if (reservations.length != 0) {
+
+    //                     this.actualizarTabla(reservations, spaceId, hours);
+    //                 } else {
+    //                     this.clearTable(spaceId);
+    //                 }
+
+    //             });
+    //             modalTableContainer.prepend(calendar);
+
+    //         case 'pool':
+
+    //         //codigo
+    //         case 'cancha':
+    //         //codigo
+    //         case 'coliseo':
+    //         //codigo
+    //     }
+    // }
+
     generateScheduleTable(spaceId) {
-        // const reservations = [
-        //     { espacio_reserva: "gym", fecha_de_reserva: "2024-10-29", hora_fin_reserva: "08:00:00", hora_inicio_reserva: "06:00:00", id_reserva: 12, id_usuario: "1020222955" },
-        //     { espacio_reserva: "gym", fecha_de_reserva: "2024-10-29", hora_fin_reserva: "08:00:00", hora_inicio_reserva: "06:00:00", id_reserva: 13, id_usuario: "1020222956" },
-        //     { espacio_reserva: "gym", fecha_de_reserva: "2024-11-01", hora_fin_reserva: "12:00:00", hora_inicio_reserva: "10:00:00", id_reserva: 14, id_usuario: "1020222957" },
-        //     { espacio_reserva: "coliseo", fecha_de_reserva: "2024-11-02", hora_fin_reserva: "14:00:00", hora_inicio_reserva: "12:00:00", id_reserva: 15, id_usuario: "1020222958" },
-        //     { espacio_reserva: "gym", fecha_de_reserva: "2024-11-03", hora_fin_reserva: "16:00:00", hora_inicio_reserva: "14:00:00", id_reserva: 16, id_usuario: "1020222959" },
-        //     { espacio_reserva: "pool", fecha_de_reserva: "2024-11-04", hora_fin_reserva: "18:00:00", hora_inicio_reserva: "16:00:00", id_reserva: 17, id_usuario: "1020222960" },
-        //     { espacio_reserva: "cancha", fecha_de_reserva: "2024-11-05", hora_fin_reserva: "20:00:00", hora_inicio_reserva: "18:00:00", id_reserva: 18, id_usuario: "1020222961" }
-        // ];
+        const hours = {
+            gym: [
+                "06:00 - 08:00", "08:00 - 10:00", "10:00 - 12:00",
+                "12:00 - 14:00", "14:00 - 16:00", "16:00 - 18:00", "18:00 - 20:00"
+            ],
+            pool: [
+                "08:00 - 10:00", "10:00 - 12:00", "12:00 - 14:00",
+                "14:00 - 16:00", "16:00 - 18:00", "18:00 - 20:00"
+            ],
+            cancha: [
+                "07:00 - 08:00", "08:00 - 09:00", "09:00 - 10:00",
+                "10:00 - 11:00", "12:00 - 13:00", "13:00 - 14:00", "14:00 - 15:00", "15:00 - 16:00", "16:00 - 17:00", "17:00 - 18:00", "18:00 - 19:00", "19:00 - 20:00"
+            ],
+            coliseo: [
+                "07:00 - 08:00", "08:00 - 09:00", "09:00 - 10:00",
+                "10:00 - 11:00", "12:00 - 13:00", "13:00 - 14:00", "14:00 - 15:00", "15:00 - 16:00", "16:00 - 17:00", "17:00 - 18:00", "18:00 - 19:00", "19:00 - 20:00"
+            ]
+        };
 
-        switch (spaceId) {
-            case 'gym':
-                const hours = [
-                    "06:00 - 08:00", "08:00  - 10:00", "10:00 - 12:00",
-                    "12:00 - 14:00", "14:00  - 16:00", "16:00 - 18:00", "18:00 - 20:00"
-                ];
-                const modalTableContainer = document.querySelector(`#${spaceId}Modal`);
+        // Asegura que el modal y la tabla existan para el espacio
+        const modalTableContainer = document.querySelector(`#${spaceId}Modal`);
 
+        if (!modalTableContainer) {
+            console.warn(`No se encontró el modal para el espacio con id ${spaceId}`);
+            return;
+        }
 
-                const calendar = document.createElement('input');
-                calendar.type = 'date';
+        // Crear input de calendario
+        const calendar = document.createElement('input');
+        calendar.type = 'date';
 
-                // Obtén fecha actual
-                const fechaActual = new Date();
-
-                const diaActual = fechaActual.getDay(); // 0 = domingo, 1 = lunes, ..., 6 = sábado
-
-                // Calcula fecha del día siguiente
-                const diaSiguiente = new Date(fechaActual.getTime() + 86400000);
-
-                // Asigna fecha mínima y máxima
-                calendar.min = fechaActual.toLocaleDateString('en-CA');
-                calendar.max = diaSiguiente.toLocaleDateString('en-CA');
-                let fechaSeleccionada
-                // Agrega evento de cambio
-                calendar.addEventListener('change', async (event) => {
-                    fechaSeleccionada = new Date(event.target.value);
-
-                    const diaSeleccionado = fechaSeleccionada.getDay();
-
-                    // Restringe sábados y domingos
-                    if (diaSeleccionado === 5 || diaSeleccionado === 6) {
-                        alert('No se puede seleccionar fines de semana');
-                        event.target.value = ''; // Limpia selección
-                    }
-
-                    // Viernes permite seleccionar lunes
-                    if (diaActual === 2 && diaSeleccionado === 5) {
-                        return;
-                    }
-
-                    fechaSeleccionada = fechaSeleccionada.toLocaleDateString('en-CA');
-                    const reservations = await this.getReservationsForSpaceByDate(fechaSeleccionada, spaceId);
-                    if (reservations.length != 0) {
-
-                        this.actualizarTabla(reservations, spaceId, hours);
-                    } else {
-                        this.clearTable(spaceId);
-                    }
-
-                });
-                modalTableContainer.prepend(calendar);
-
-            case 'pool':
-                hours = [
-                    "06:00 - 07:00", "07:00  - 08:00", "08:00 - 09:00",
-                    "09:00 - 10:00", "10:00  - 11:00", "11:00 - 12:00", "12:00 - 13:00", "13:00 - 14:00", "14:00 - 15:00", "15:00 - 16:00", "16:00 - 17:00", "17:00 - 18:00", "18:00 - 19:00", "19:00 - 20:00"
-                ];
-                const modalTableContainer = document.querySelector(`#${spaceId}Modal`);
+        // Obtener fecha actual
+        const fechaActual = new Date();
+        const diaActual = fechaActual.getDay(); // 0 = domingo, 1 = lunes, ..., 6 = sábado
+        let diaSiguiente = new Date(fechaActual.getTime() + 86400000); // Fecha del día siguiente
 
 
-                const calendar = document.createElement('input');
-                calendar.type = 'date';
+        let fechaMin, fechaMax;
 
-                // Obtén fecha actual
-                const fechaActual = new Date();
+        // Calcular fecha mínima y máxima (día siguiente)
+        // Verifica si el espacio es 'pool', 'cancha' o 'coliseo' y ajusta la fecha mínima y máxima
+        if (spaceId === 'pool' || spaceId === 'cancha' || spaceId === 'coliseo') {
+            // Si es sábado o domingo, ajusta para el próximo lunes
+            if (diaActual === 6) { // Si es domingo
+                fechaMin = new Date(fechaActual.getTime() + 2 * 86400000); // Ajusta a lunes
+            } else if (diaActual === 0) { // Si es lunes
+                fechaMin = new Date(fechaActual.getTime() + 1 * 86400000); // Ajusta a lunes
+            } else {
+                // Ajusta la fecha mínima al lunes de la misma semana
+                fechaMin = new Date(fechaActual);
+                fechaMin.setDate(fechaMin.getDate() + (1 - diaActual)); // Ajusta a lunes
+            }
 
-                const diaActual = fechaActual.getDay(); // 0 = domingo, 1 = lunes, ..., 6 = sábado
+            // Ajusta la fecha máxima al viernes de la misma semana
+            fechaMax = new Date(fechaMin);
+            fechaMax.setDate(fechaMin.getDate() + 4); // Ajusta a viernes
 
-                // Calcula fecha del día siguiente
-                const diaSiguiente = new Date(fechaActual.getTime() + 86400000);
+        } else {
+            // Para otros espacios, permitir elegir desde la fecha actual hasta el día siguiente
+            fechaMin = fechaActual;
+            fechaMax = diaSiguiente;
+        }
 
-                // Asigna fecha mínima y máxima
-                calendar.min = fechaActual.toLocaleDateString('en-CA');
-                calendar.max = diaSiguiente.toLocaleDateString('en-CA');
-                let fechaSeleccionada
-                // Agrega evento de cambio
-                calendar.addEventListener('change', async (event) => {
-                    fechaSeleccionada = new Date(event.target.value);
+        calendar.min = fechaMin.toLocaleDateString('en-CA');
+        calendar.max = fechaMax.toLocaleDateString('en-CA');
 
-                    const diaSeleccionado = fechaSeleccionada.getDay();
+        // Agregar el evento de cambio de fecha
+        calendar.addEventListener('change', async (event) => {
+            let fechaSeleccionada = new Date(event.target.value);
+            const diaSeleccionado = fechaSeleccionada.getDay();
 
-                    // Restringe sábados y domingos
-                    if (diaSeleccionado === 5 || diaSeleccionado === 6) {
-                        alert('No se puede seleccionar fines de semana');
-                        event.target.value = ''; // Limpia selección
-                    }
+            // Restringir sábados y domingos
+            if (diaSeleccionado === 5 || diaSeleccionado === 6) {
+                alert('No se puede seleccionar fines de semana');
+                event.target.value = ''; // Limpiar selección
+                return;
+            }
 
-                    // Viernes permite seleccionar lunes
-                    if (diaActual === 2 && diaSeleccionado === 5) {
-                        return;
-                    }
+            // Condición especial: si es viernes (2), se puede seleccionar lunes
+            if (diaActual === 2 && diaSeleccionado === 5) {
+                return;
+            }
 
-                    fechaSeleccionada = fechaSeleccionada.toLocaleDateString('en-CA');
-                    const reservations = await this.getReservationsForSpaceByDate(fechaSeleccionada, spaceId);
-                    if (reservations.length != 0) {
+            // Formatear la fecha seleccionada
+            fechaSeleccionada = fechaSeleccionada.toLocaleDateString('en-CA');
 
-                        this.actualizarTabla(reservations, spaceId, hours);
-                    } else {
-                        this.clearTable(spaceId);
-                    }
+            // Llamar la función que obtiene las reservaciones
+            const reservations = await this.getReservationsForSpaceByDate(fechaSeleccionada, spaceId);
 
-                });
-                modalTableContainer.prepend(calendar);
-            //codigo
-            case 'cancha':
-            //codigo
-            case 'coliseo':
-            //codigo
+            // Limpiar la tabla antes de actualizar
+            this.clearTable(spaceId);
+
+            // Verificar si hay reservas para esa fecha
+
+            if (reservations.length >= 0 && fechaSeleccionada) {
+
+                this.actualizarTabla(reservations, spaceId, hours[spaceId]);
+            } else {
+                this.clearTable(spaceId);
+            }
+
+        });
+
+        // Agregar calendario al contenedor del modal
+        if (!modalTableContainer.querySelector('input[type="date"]')) {
+            // Solo agregamos el input si no existe uno ya
+            modalTableContainer.querySelector('.modal-content').prepend(calendar);
         }
     }
+
 
     clearTable(spaceId) {
         const modalTableContainer = document.querySelector(`#${this.spaceId}Modal`);
@@ -371,12 +434,22 @@ class Main {
         let MAX_CAPACITY_PER_HOUR = 2;
         let hourBlocks = {
             "06:00:00": 0,
+            "07:00:00": 0,
             "08:00:00": 0,
+            "09:00:00": 0,
             "10:00:00": 0,
+            "11:00:00": 0,
             "12:00:00": 0,
+            "13:00:00": 0,
             "14:00:00": 0,
+            "15:00:00": 0,
             "16:00:00": 0,
-            "18:00:00": 0
+            "17:00:00": 0,
+            "18:00:00": 0,
+            "19:00:00": 0,
+            "20:00:00": 0,
+            "21:00:00": 0,
+            "22:00:00": 0
         };
 
 
