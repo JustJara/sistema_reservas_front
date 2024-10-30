@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Reservas | UdeM</title>
     <link rel="stylesheet" href="../css/pagina_reservas.css" />
+
+
 </head>
 
 <body>
@@ -28,80 +30,242 @@
 
             <div class="div3">
                 <section class="container2">
-                    <div class="space">
+                    <button data-id="pool" class="space">
                         <div class="space-info">
                             <h2>Piscina</h2>
                             <p>Observaciones...</p>
                         </div>
-                        <input type="radio" name="selected-space" />
-                    </div>
+                        <!-- <input type="radio" name="selected-space" /> -->
+                    </button>
+                    <!-- <button id="piscina" >
+                        <h2>Piscina</h2>
+                        <p>Observaciones...</p>
+                    </button> -->
 
-                    <div class="space">
+                    <button data-id="gym" class="space">
                         <div class="space-info">
                             <h2>Gimnasio</h2>
                             <p>Observaciones...</p>
                         </div>
-                        <input type="radio" name="selected-space" />
-                    </div>
+                        <!-- <input type="radio" name="selected-space" /> -->
+                    </button>
 
-                    <div class="space">
+                    <button data-id="cancha" class="space">
                         <div class="space-info">
                             <h2>Cancha</h2>
                             <p>Observaciones...</p>
                         </div>
-                        <input type="radio" name="selected-space" />
-                    </div>
+                        <!-- <input type="radio" name="selected-space" /> -->
+                    </button>
 
-                    <div class="space">
-                        <div class="space-info">
-                            <h2>Aulas</h2>
-                            <p>Observaciones...</p>
-                        </div>
-                        <input type="radio" name="selected-space" />
-                    </div>
-
-                    <div class="space">
-                        <div class="space-info">
-                            <h2>Casa club del egresado</h2>
-                            <p>Observaciones...</p>
-                        </div>
-                        <input type="radio" name="selected-space" />
-                    </div>
-
-                    <div class="space">
+                    <button data-id="coliseo" class="space">
                         <div class="space-info">
                             <h2>Coliseo</h2>
                             <p>Observaciones...</p>
                         </div>
-                        <input type="radio" name="selected-space" />
-                    </div>
+                        <!-- <input type="radio" name="selected-space" /> -->
+                    </button>
                 </section>
             </div>
         </div>
     </div>
 
-    <div class="container3">
-        <form id="reservationForm">
-            <h3>Agregue sus datos y guarde su reserva</h3>
-            <label>Fecha</label>
-            <input id="calendar" type="datetime-local" placeholder="Seleccione una fecha" />
+    <dialog id="poolModal">
+        <h1>Disponibilidad de Salas</h1>
+        <div class="modal-content">
+            <form id="poolReservationForm">
 
-                <label for="name">Nombre y apellidos*</label>
-                <input type="text" id="name" name="name" required />
-
-                <label for="relationship">Vínculo con la Universidad</label>
-                <select id="relationship" name="relationship" required>
-                    <option value="">--Seleccione una opción--</option>
-                    <option value="estudiante">Estudiante</option>
-                    <option value="profesor">Profesor</option>
-                    <option value="personal">Personal</option>
-                    <option value="otro">Otro</option>
-                </select>
-
-                <button class="form-submit-button" type="submit">Guardar Reserva</button>
+                <input type="date" id="date" name="date" required>
+                <table id="scheduleTable">
+                <thead>
+                <tr>
+                <th>Hora</th>
+                <th>Disponibilidad</th>
+                <!-- Agrega más salas según sea necesario -->
+                </tr>
+                </thead>
+                <tbody>
+                    <!-- Filas generadas por JavaScript -->
+                </tbody>
+                </table>
+                <button id="poolModalcancel">cancelar</button>
+                <button type="submit" id="confirmar" >confirmar</button>
             </form>
         </div>
+    </dialog>
+
+    <dialog id="gymModal">
+        <h1>Disponibilidad de Salas</h1>
+        <div class="modal-content">
+            <form id="gymReservationForm">
+                <table id="scheduleTable">
+                <thead>
+                <tr>
+                <th>Hora</th>
+                <th>Disponibilidad</th>
+                <!-- Agrega más salas según sea necesario -->
+                </tr>
+                </thead>
+                <tbody>
+                    <!-- Filas generadas por JavaScript -->
+                </tbody>
+                </table>
+
+                <button type="button" id="gymModalcancel">cancelar</button>
+                <button type="submit" id="confirmar" >confirmar</button>
+            </form>
+        </div>
+    </dialog>
+
+    <dialog id="canchaModal">
+        <h1>Disponibilidad de Salas</h1>
+        <div class="modal-content">
+            <form id="canchaReservationForm">
+
+                <table id="scheduleTable">
+                <thead>
+                <tr>
+                <th>Hora</th>
+                <th>Disponibilidad</th>
+                <!-- Agrega más salas según sea necesario -->
+                </tr>
+                </thead>
+                <tbody>
+                    <!-- Filas generadas por JavaScript -->
+                </tbody>
+                </table>
+                <button id="canchaModalcancel">cancelar</button>
+                <button type="submit" id="confirmar" >confirmar</button>
+            </form>
+        </div>
+    </dialog>
+
+    <dialog id="coliseoModal">
+        <h1>Disponibilidad de Salas</h1>
+        <div class="modal-content">
+            <form id="coliseoReservationForm">
+                
+                <table id="scheduleTable">
+                <thead>
+                <tr>
+                <th>Hora</th>
+                <th>Disponibilidad</th>
+                <!-- Agrega más salas según sea necesario -->
+                </tr>
+                </thead>
+                <tbody>
+                    <!-- Filas generadas por JavaScript -->
+                </tbody>
+                </table>
+                <button id="coliseoModalcancel">cancelar</button>
+                <button type="submit" id="confirmar" >confirmar</button>
+            </form>
+        </div>
+    </dialog>
+
+    <!-- <div class="gymModal" id="gymDisponibilityModal">
+        <span class="close">&times;</span>
+        <h1>Disponibilidad de Salas</h1>
+        <div class="modal-content">
+            <table id="scheduleTable">
+            <thead>
+            <tr>
+            <th>Hora</th>
+            <th>Disponibilidad</th> -->
+            <!-- Agrega más salas según sea necesario -->
+            <!-- </tr>
+            </thead>
+            <tbody> -->
+                <!-- Filas generadas por JavaScript -->
+            <!-- </tbody>
+            </table>
+        </div>
+    </div> -->
+
+    <!-- <div class="poolModal" id="poolDisponibilityModal">
+        <span class="close">&times;</span>
+        <h1>Disponibilidad de Salas</h1>
+        <div class="modal-content">
+            <table id="scheduleTable">
+            <thead>
+            <tr>
+            <th>Hora</th>
+            <th>Disponibilidad</th> -->
+            <!-- Agrega más salas según sea necesario -->
+            <!-- </tr>
+            </thead>
+            <tbody> -->
+                <!-- Filas generadas por JavaScript -->
+            <!-- </tbody>
+            </table>
+        </div>
+    </div> -->
+
+    <!-- <div class="canchaModal" id="canchaDisponibilityModal">
+        <span class="close">&times;</span>
+        <h1>Disponibilidad de Salas</h1>
+        <div class="modal-content">
+            <table id="scheduleTable">
+            <thead>
+            <tr>
+            <th>Hora</th>
+            <th>Disponibilidad</th> -->
+            <!-- Agrega más salas según sea necesario -->
+            <!-- </tr>
+            </thead>
+            <tbody> -->
+                <!-- Filas generadas por JavaScript -->
+            <!-- </tbody>
+            </table>
+        </div>
+    </div> -->
+
+    <!-- <div class="coliseoModal" id="coliseoDisponibilityModal">
+        <span class="close">&times;</span>
+        <h1>Disponibilidad de Salas</h1>
+        <div class="modal-content">
+            <table id="scheduleTable">
+            <thead>
+            <tr>
+            <th>Hora</th>
+            <th>Disponibilidad</th> -->
+            <!-- Agrega más salas según sea necesario -->
+            <!-- </tr>
+            </thead>
+            <tbody> -->
+                <!-- Filas generadas por JavaScript -->
+            <!-- </tbody>
+            </table>
+        </div>
+    </div> -->
+
+
+    <!-- <div id="reservationModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form id="reservationForm">
+                <label for="name">Nombre:</label>
+                <input type="text" id="name" required>
+                
+                <label for="time">Hora:</label>
+                <input type="text" id="time" readonly>
+                
+                <button id="confirmReservationButton" type="submit">Confirmar Reserva</button>
+            </form>
+        </div>
+    </div> -->
+    <div class="container3">
+        <!-- Este es el modal para confirmar la reserva -->
     </div>
+
+
+
 </body>
+<script src="../js/main.js" type="module" ></script>
+
+
+
+
+
 
 </html>
