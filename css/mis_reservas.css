@@ -98,9 +98,6 @@ img {
     transition: background-color 0.3s;
 }
 
-.btn-reserva:hover {
-    background-color: #C22620;
-}
 
 
 .reservations{
@@ -122,9 +119,9 @@ img {
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     border-bottom-left-radius: 20px;
+
     border-bottom-right-radius: 20px;
 }
-
 
 
 .card:hover .info__description{
@@ -137,6 +134,7 @@ img {
 
 .card-content{
     width: 100%;
+
     height: auto;
     white-space: normal;
     word-wrap: break-word;
@@ -155,6 +153,7 @@ img {
 
 .info__description{
     height: 80px;
+
     color: #474747;
     background: #EFF3F5;
     padding: 20px;
@@ -185,3 +184,5 @@ img {
 .noReservas{
     margin: auto;
 }
+
+

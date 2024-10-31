@@ -203,6 +203,12 @@ class Main {
         element.addEventListener('submit', async (event) => {
             event.preventDefault();
             const timeInput = document.querySelector('input[name="time"]:checked');
+            if (!timeInput) {
+                alert("Debes de seleccionar campos para reservar");
+                // window.location.reload();
+                return;
+                
+            }
             const time = timeInput.value;
 
             const { startTime, endTime } = this.convertToTimeRange(time);
@@ -224,80 +230,6 @@ class Main {
         })
     }
 
-
-    // generateScheduleTable(spaceId) {
-    //     // const reservations = [
-    //     //     { espacio_reserva: "gym", fecha_de_reserva: "2024-10-29", hora_fin_reserva: "08:00:00", hora_inicio_reserva: "06:00:00", id_reserva: 12, id_usuario: "1020222955" },
-    //     //     { espacio_reserva: "gym", fecha_de_reserva: "2024-10-29", hora_fin_reserva: "08:00:00", hora_inicio_reserva: "06:00:00", id_reserva: 13, id_usuario: "1020222956" },
-    //     //     { espacio_reserva: "gym", fecha_de_reserva: "2024-11-01", hora_fin_reserva: "12:00:00", hora_inicio_reserva: "10:00:00", id_reserva: 14, id_usuario: "1020222957" },
-    //     //     { espacio_reserva: "coliseo", fecha_de_reserva: "2024-11-02", hora_fin_reserva: "14:00:00", hora_inicio_reserva: "12:00:00", id_reserva: 15, id_usuario: "1020222958" },
-    //     //     { espacio_reserva: "gym", fecha_de_reserva: "2024-11-03", hora_fin_reserva: "16:00:00", hora_inicio_reserva: "14:00:00", id_reserva: 16, id_usuario: "1020222959" },
-    //     //     { espacio_reserva: "pool", fecha_de_reserva: "2024-11-04", hora_fin_reserva: "18:00:00", hora_inicio_reserva: "16:00:00", id_reserva: 17, id_usuario: "1020222960" },
-    //     //     { espacio_reserva: "cancha", fecha_de_reserva: "2024-11-05", hora_fin_reserva: "20:00:00", hora_inicio_reserva: "18:00:00", id_reserva: 18, id_usuario: "1020222961" }
-    //     // ];
-
-    //     switch (spaceId) {
-    //         case 'gym':
-    //             const hours = [
-    //                 "06:00 - 08:00", "08:00  - 10:00", "10:00 - 12:00",
-    //                 "12:00 - 14:00", "14:00  - 16:00", "16:00 - 18:00", "18:00 - 20:00"
-    //             ];
-    //             const modalTableContainer = document.querySelector(`#${spaceId}Modal`);
-
-
-    //             const calendar = document.createElement('input');
-    //             calendar.type = 'date';
-
-    //             // Obtén fecha actual
-    //             const fechaActual = new Date();
-
-    //             const diaActual = fechaActual.getDay(); // 0 = domingo, 1 = lunes, ..., 6 = sábado
-
-    //             // Calcula fecha del día siguiente
-    //             const diaSiguiente = new Date(fechaActual.getTime() + 86400000);
-
-    //             // Asigna fecha mínima y máxima
-    //             calendar.min = fechaActual.toLocaleDateString('en-CA');
-    //             calendar.max = diaSiguiente.toLocaleDateString('en-CA');
-    //             let fechaSeleccionada
-    //             // Agrega evento de cambio
-    //             calendar.addEventListener('change', async (event) => {
-    //                 fechaSeleccionada = new Date(event.target.value);
-
-    //                 const diaSeleccionado = fechaSeleccionada.getDay();
-
-    //                 // Restringe sábados y domingos
-    //                 if (diaSeleccionado === 5 || diaSeleccionado === 6) {
-    //                     alert('No se puede seleccionar fines de semana');
-    //                     event.target.value = ''; // Limpia selección
-    //                 }
-
-    //                 // Viernes permite seleccionar lunes
-    //                 if (diaActual === 2 && diaSeleccionado === 5) {
-    //                     return;
-    //                 }
-
-    //                 fechaSeleccionada = fechaSeleccionada.toLocaleDateString('en-CA');
-    //                 const reservations = await this.getReservationsForSpaceByDate(fechaSeleccionada, spaceId);
-    //                 if (reservations.length != 0) {
-
-    //                     this.actualizarTabla(reservations, spaceId, hours);
-    //                 } else {
-    //                     this.clearTable(spaceId);
-    //                 }
-
-    //             });
-    //             modalTableContainer.prepend(calendar);
-
-    //         case 'pool':
-
-    //         //codigo
-    //         case 'cancha':
-    //         //codigo
-    //         case 'coliseo':
-    //         //codigo
-    //     }
-    // }
 
     generateScheduleTable(spaceId) {
         const hours = {
@@ -339,7 +271,6 @@ class Main {
 
         let fechaMin, fechaMax;
 
-        // Calcular fecha mínima y máxima (día siguiente)
         // Verifica si el espacio es 'pool', 'cancha' o 'coliseo' y ajusta la fecha mínima y máxima
         if (spaceId === 'pool' || spaceId === 'cancha' || spaceId === 'coliseo') {
             // Si es sábado o domingo, ajusta para el próximo lunes
@@ -460,20 +391,20 @@ class Main {
         });
 
         // Generar filas de la tabla
+        const row = document.createElement("tr");
         hours.forEach((hourBlock) => {
-            const row = document.createElement("tr");
-            const hourCell = document.createElement("td");
-            hourCell.textContent = hourBlock;
-            row.appendChild(hourCell);
+            // const hourCell = document.createElement("td");
+            // hourCell.textContent = hourBlock;
+            // row.appendChild(hourCell);
 
             const statusCell = document.createElement("td");
             const status = hourBlocks[`${hourBlock.slice(0, 5)}:00`] < MAX_CAPACITY_PER_HOUR ? 'Disponible' : 'Ocupado';
             statusCell.classList.add(status);
 
             if (status === 'Disponible') {
-                statusCell.innerHTML = `<input name="time" type="radio" class="${status}" value="${hourBlock}" >`;
+                statusCell.innerHTML = `<input name="time" type="radio" class="${status}" value="${hourBlock}" >${hourBlock}</input>`;
             } else {
-                statusCell.innerText = 'No disponible';
+                statusCell.innerText = hourBlock;
             }
 
             row.appendChild(statusCell);
