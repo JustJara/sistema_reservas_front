@@ -1,38 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de reservas | UdeM</title>
     <link rel="stylesheet" href="../css/home.css">
 </head>
+
 <body>
     <div class="container">
 
         <div class="parent">
             <div class="div1">
                 <div class="logo">
-                    <img src="../assets/logo_udem.jpeg" alt="Logo universidad de medellín" href="https://udemedellin.edu.co/">
-    
+                    <img src="../assets/logo_udem.jpeg" alt="Logo universidad de medellín"
+                        href="https://udemedellin.edu.co/">
+
                 </div>
             </div>
             <div class="div2">
                 <nav class="nav-bar">
                     <a href="home.html">Inicio</a>
-                    <a href="espacios_para_reservar.html">Reservar espacios</a>
+                    <a href="pagina_reservas1.html">Reservar espacios</a>
                     <a href="mis_reservas.html">Mis reservas</a>
                 </nav>
-                
             </div>
             <div class="div3">
+
             </div>
             <div class="div4">
                 <p>
-                    Te invitamos a conocer las zonas que integran este campus para la formación integral y el bienestar de la comunidad universitaria. 
-                193 aulas, 43 laboratorios, 23 salas de cómputo, una biblioteca, un teatro, siete auditorios y servicios básicos generales, entre otros, 
-                hacen parte de este espacio para vivir el futuro.
+                    Te invitamos a conocer las zonas que integran este campus para la formación integral y el
+                    bienestar de la comunidad universitaria.
+                    193 aulas, 43 laboratorios, 23 salas de cómputo, una biblioteca, un teatro, siete auditorios y
+                    servicios básicos generales, entre otros,
+                    hacen parte de este espacio para vivir el futuro.
                 </p>
-    
+
             </div>
             <div class="div5">
                 <section class="gallery">
@@ -43,6 +48,37 @@
                 </section>
             </div>
         </div>
+    </div>
+    </div>
+    <div class="child">
+        <div class="div-gallery">
+
+            <h2>Espacios para reservar</h2>
+            <div class="carousel">
+                <div class="carousel-items">
+                    <div class="carousel-item" onclick="selectSpace('piscina')">
+                        <img src="../assets/espacios/4.png" alt="Piscina">
+                        <p>Piscina</p>
+                    </div>
+                    <div class="carousel-item" onclick="selectSpace('aulas')">
+                        <img src="../assets/espacios/5.png" alt="Aulas">
+                        <p>Aulas</p>
+                    </div>
+                    <div class="carousel-item" onclick="selectSpace('gimnasio')">
+                        <img src="../assets/espacios/6.png" alt="Gimnasio">
+                        <p>Gimnasio</p>
+                    </div>
+                    <div class="carousel-item" onclick="selectSpace('cancha')">
+                        <img src="../assets/espacios/7.png" alt="Cancha">
+                        <p>Cancha</p>
+                    </div>
+                </div>
+            </div>
+            <div class="reserve-button">
+                <a href="pagina_reservas1.html" class="btn-reserva">Reserva Ahora</a>
+            </div>
+        </div>
+
     </div>
 </body>
 

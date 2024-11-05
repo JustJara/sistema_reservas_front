@@ -504,7 +504,6 @@ class Main {
     }
 
     async deleteReservation(id_reserva) {
-        console.log("🚀 ~ Main ~ deleteReservation ~ id_reserva:", id_reserva)
         const identification = this.userService.getIdentification();
         const response = await this.reservationService.deleteReservationById(id_reserva, identification);
         if (response.affectedRows > 0) {
